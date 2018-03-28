@@ -1,4 +1,4 @@
-# Community Library - Rails
+# Community Library - Rails with jQuery Front End
 
 ### A Rails application for tracking books in your library, and sharing/borrowing books from others!
 
