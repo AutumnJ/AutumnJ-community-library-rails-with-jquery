@@ -1,29 +1,32 @@
 $(document).ready(function() {
   $('a.load-comments').on('click', function(e) {
-    $(this).hide();
+    $(this).hide(); //LOOKS BETTER HIDDEN, BUT CAN LEAVE OUT?
     e.preventDefault();
     $.ajax({
       method: "GET",
       dataType: "json",
       url: this.href
     })
-      .done(function( data ) {
+      .success(function( data ) {
+        //SHOULD I USE LET HERE
         const otherComments = data.other_comments
-        console.log(otherComments)
-        if (otherComments === "[]" || otherComments.length === 0) {
-          const comment = document.createElement("P");
-          comment.innerHTML = "No comments from other users";
-          $(".all-comments").append(comment);
+        if (otherComments.length === 0) {
+          const $header = $("div.all-comments strong");
+          $header.html("");
+          $header.html("No comments from other users")
         } else {
         // const userComments = data.user_comments
-          const header = document.createElement("P")
-          header.innerHTML = "Other User's Comments:"
-          $(".all-comments").append(header);
-          for (let i = 0; i < otherComments.length; i ++) {
-            const comment = document.createElement("P");
-            comment.innerHTML = otherComments[i]["content"];
-            $(".all-comments").append(comment);
-          }
+          const $header = $("div.all-comments strong");
+          $header.html("");
+          $header.html("Other User's Comments:")
+
+          const $ul = $("div.all-comments ul")
+          $ul.html("");
+          otherComments.forEach(function(comment) {
+            debugger
+            //need to append name here - can I obtain by setting up serializer?
+            $ul.append("<li>" + comment.content + "</li>");
+          });
         }
       });
   });
@@ -32,3 +35,6 @@ $(document).ready(function() {
 
 //make formatting above look as it does currently
 //prototype this? 
+//upon iteration, send to constructor to create name, date, etc
+//then send to prototype to add styling
+//then append to element at end of iteration 
