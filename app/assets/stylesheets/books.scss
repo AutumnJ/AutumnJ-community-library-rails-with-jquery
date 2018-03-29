@@ -34,10 +34,18 @@
   font-size: 15pt;
 }
 
-.all-comments, .load-comments a {
+a.load-comments, .all-comments p, .all-comments strong{
     font-family: 'Open Sans Condensed', sans-serif;
     padding-left: 2cm;
     font-size: 15pt;
+    list-style-type: none;
+}
+
+.all-comments ul {
+    font-family: 'Open Sans Condensed', sans-serif;
+    padding-left: 3cm;
+    font-size: 15pt;
+    list-style-type: none;
 }
 
 .links {
