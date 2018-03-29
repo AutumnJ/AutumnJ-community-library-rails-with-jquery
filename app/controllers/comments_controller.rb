@@ -6,14 +6,20 @@ class CommentsController < ApplicationController
 
   def index
     @user_comments = Comment.user_comments(current_user)
-    @other_comments = Comment.other_users_comments((find_book.id), current_user)
+
+    if params[:book_id]
+      @other_comments = Comment.other_users_comments((find_book.id), current_user)
+    end
 
     respond_to do |format|
       format.html { render :index }
       format.json { render json: { 
-        user_comments: @user_comments, #not using this currently, but could
+        user_comments: @user_comments, #not using this currently, but could 
+        # other_comments: (Comment.other_users_comments((find_book.id), current_user)) }
         other_comments: @other_comments }
+        #how do I access user.name property in js -> pass it in here?, set custom serializer?
       }
+
     end
   end
 
