@@ -6,12 +6,13 @@ class CommentsController < ApplicationController
 
   def index
     @user_comments = Comment.user_comments(current_user)
+    @other_comments = Comment.other_users_comments((find_book.id), current_user)
 
     respond_to do |format|
       format.html { render :index }
       format.json { render json: { 
-        user_comments: @user_comments.to_json, 
-        other_comments: (Comment.other_users_comments((find_book.id), current_user)) }
+        user_comments: @user_comments, #not using this currently, but could
+        other_comments: @other_comments }
       }
     end
   end
