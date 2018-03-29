@@ -1,10 +1,10 @@
  <h1>Your comments:</h1>
 
 <div class="book-info">
-  <% if !@comments.present? %>
+  <% if !@user_comments.present? %>
     <i>No comments yet!</i>
   <% else %>
-    <% @comments.all.each do |comment| %>
+    <% @user_comments.all.each do |comment| %>
 
       <ul><i>Book Title: </i><%= comment.book.title %><br>
       <i>Comment: </i><%= comment.content %><br>
