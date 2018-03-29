@@ -5,7 +5,15 @@ class CommentsController < ApplicationController
   skip_before_action :find_book, :only => [:index]
 
   def index
-    @comments = Comment.user_comments(current_user)
+    @user_comments = Comment.user_comments(current_user)
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: { 
+        user_comments: @user_comments.to_json, 
+        other_comments: (Comment.other_users_comments((find_book.id), current_user)) }
+      }
+    end
   end
 
   def new
