@@ -17,4 +17,8 @@ class Comment < ActiveRecord::Base
     where({book_id: book_id}).order(:created_at)
   end
 
+  def self.other_users_comments(book_id, current_user)
+    where("user_id != ? AND book_id = ?", current_user.id, book_id).order(:created_at)
+  end
+
 end
