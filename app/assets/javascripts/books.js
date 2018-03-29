@@ -23,7 +23,6 @@ $(document).ready(function() {
           const $ul = $("div.all-comments ul")
           $ul.html("");
           otherComments.forEach(function(comment) {
-            debugger
             //need to append name here - can I obtain by setting up serializer?
             $ul.append("<li>" + comment.content + "</li>");
           });
