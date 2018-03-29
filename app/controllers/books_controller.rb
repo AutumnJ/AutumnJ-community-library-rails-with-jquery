@@ -31,6 +31,12 @@ class BooksController < ApplicationController
     else
       @text = "Private - not available for the community to borrow"
     end
+
+
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @book }
+    end
   end
 
   def show_borrowed
