@@ -31,6 +31,7 @@ gem 'devise', '~> 4.2.0'
 # load environment variables that I can hide
 gem 'dotenv-rails'
 gem 'omniauth-github'
+gem 'active_model_serializers'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
