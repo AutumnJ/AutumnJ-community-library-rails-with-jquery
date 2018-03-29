@@ -12,10 +12,12 @@
 </div>
 
 <div class="field">
-  <%= f.label :book_genres, " Select genre(s):" %><br>
+  <%= f.label :book_genres, "Select genre(s):" %><br>
   <%= f.collection_check_boxes(:genre_ids, Genre.all.order(:name), :id, :name) do |b| %>
     <%= b.label { b.check_box + b.text } %><br>
   <% end %>
+</div>
+<div class="field">
   <%= f.label :book_genres, "New Genre:" %>
   <%= f.fields_for :genres, @book.genres.build do |genre| %>
     <%= genre.text_field :name %>
