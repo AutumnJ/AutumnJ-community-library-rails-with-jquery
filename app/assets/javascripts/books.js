@@ -15,6 +15,7 @@ $(document).ready(function() {
           $header.html("");
           $header.html("No comments from other users")
         } else {
+          console.log(otherComments)
         // const userComments = data.user_comments
           const $header = $("div.all-comments strong");
           $header.html("");
