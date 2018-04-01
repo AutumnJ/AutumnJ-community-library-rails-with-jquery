@@ -3,6 +3,10 @@
   <%= f.text_area :content, cols: "30", rows: "4", maxlength:"200" %><br>
 </div>
 
-<div class="submit">
-  <%= f.submit %>
+<div class="comment-edit">
+  <div class="submit">
+    <%= f.submit "Update" %>
+  </div>
 </div>
+
+<button class="delete-button"><%= link_to "Delete", book_comment_path(@book, @comment), method: "delete" %></button>
