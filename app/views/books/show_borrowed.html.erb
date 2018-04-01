@@ -4,7 +4,18 @@
   Below is the info about the book you're returning to: <%= @book.user.name %>
 </div>
 <%= render partial:'show_basic_info', locals: {book: @book} %>
-<%= render partial: 'show_author_genre', locals: {book: @book} %>
+
+<div class="book-authors">
+  <%= link_to "Authors", borrowed_book_path(@book), :class => "load-authors" %><br>
+  <strong></strong>
+  <ul></ul>
+</div>
+
+<div class="book-genres">
+  <%= link_to "Genres", borrowed_book_path(@book), :class => "load-genres" %><br>
+  <strong></strong>
+  <ul></ul>
+</div>
 
 <div class="book-info">
   <% if @comments.present? %>
@@ -27,7 +38,7 @@
 </div>
 
 <div class="all-comments">
-  <%= link_to "See Other Users' Comments", book_comments_path(@book), :class => "load-comments" %><br>
+  <%= link_to "See Other Users' Comments", borrowed_book_path(@book), :class => "load-comments" %><br>
   <strong></strong>
   <ul>
   </ul>
