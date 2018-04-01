@@ -1,3 +1,9 @@
 // Place all the styles related to the Comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.delete-button, .delete-button a, .delete-button a:visited, .delete-button a:active, .comment-edit {
+  text-decoration: none;
+  color: #000000;
+  display:inline-block;
+}
