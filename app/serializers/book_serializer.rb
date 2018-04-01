@@ -3,4 +3,7 @@ class BookSerializer < ActiveModel::Serializer
 
   belongs_to :user
   has_many :comments
+  has_many :genres
+  has_many :authors
+  
 end
