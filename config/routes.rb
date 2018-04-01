@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   #comment belongs_to book and borrowed is "nested" under books/:id
   #so comment CRUD routes live with books#show -- books/:book_id/comments/:id
   resources :books, only: [:show_borrowed] do
-    resources :comments, only: [:new, :create, :edit, :update, :destroy, :index]
+    resources :comments, only: [:new, :create, :edit, :update, :destroy, :index, :show]
   end
 
   #powers comment index, which allows editing and deletion by linking to nested routes above
