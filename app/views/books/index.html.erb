@@ -40,4 +40,8 @@
   <% end %>
 </div>
 
-<h2><%= link_to "View Your Comments", comments_path %></h2>
+<h2><%= link_to "View Your Comments", comments_path, :class => "load-all-comments" %></h2>
+<div class="all-user-comments">
+  <h2></h2>
+  <ul></ul>
+</div>
