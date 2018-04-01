@@ -32,17 +32,33 @@ class BooksController < ApplicationController
       @text = "Private - not available for the community to borrow"
     end
 
-
+    #use this to display authors, genres with has_many (link to their show pages)
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @book }
     end
+
   end
 
   def show_borrowed
     if @book = Book.find_by(id: params[:id], borrower: current_user.id)
       book_id = @book.id
       @comments = Comment.user_comments_by_book(book_id, current_user)
+
+      #power JSON view of other comments:
+      @other_comments = Comment.other_users_comments((book_id), current_user)
+      @other_comments_with_user = @other_comments.map{|c| {content: c.content, user: c.user}}
+
+      respond_to do |format|
+        format.html { render :show_borrowed }
+        format.json { render json: { 
+          comments: @other_comments_with_user,
+          msg_no_comments: "No comments from other users",
+          msg: "Other User's Comments:",
+          authors: @book.authors,
+          genres: @book.genres }
+        }
+      end
     else
       redirect_to authenticated_root_path
     end
@@ -51,7 +67,22 @@ class BooksController < ApplicationController
   def show_available_to_borrow
     @book = Book.find(params[:id])
     book_id = @book.id
+
+    #power JSON view of all comments:
     @comments = Comment.all_comments(book_id)
+    @comments_with_user = @comments.map{|c| {content: c.content, user: c.user}}
+
+    respond_to do |format|
+      format.html { render :show_available_to_borrow }
+      format.json { render json: { 
+        comments: @comments_with_user,
+        msg_no_comments: "No comments",
+        msg: "Comments about this book:",
+        authors: @book.authors,
+        genres: @book.genres }
+      }
+    end
+
     if !@book.available?(current_user)
       redirect_to authenticated_root_path
     end
