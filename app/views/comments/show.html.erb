@@ -1,0 +1,28 @@
+<div class="book-info">
+
+  <ul><i>Book Title: </i><%= @comment.book.title %><br>
+  <i>Comment: </i><%= @comment.content %><br>
+  <i> Comment submitted: </i><%= @comment.updated_at.strftime("%A, %b %e, %Y") %><br>
+  <%= link_to "Delete", book_comment_path(@book, @comment), method: "delete" %>|<%= link_to "Edit", edit_book_comment_path(@book, @comment) %></ul>
+
+</div>
+
+
+<div class="book-info">
+<div class="bookTitle"><i>Book Title: </i><%= @comment.book.title %></div>
+<div class="bookComment"><i>Comment: </i><%= @comment.content %></div>
+<div class="commentDate"></i><i> Comment submitted: </i><%= @comment.updated_at.strftime("%A, %b %e, %Y") %></div>
+
+<div class="book-info-links"></div></div>
+
+<div class="book-info">
+  <% if @comments.length > 1 %>
+      <a href="#" class="js-next" data-id="0">Next...</a>
+  <% else %>
+    <%= link_to "Edit", edit_book_comment_path(@book, @comment) %>
+  <% end %>
+</div>
+
+
+<!-- <div class="deleteLink"></div>|<div class="updateLink">Word</div> -->
+<!-- <a href="#" class="deleteLink"></a>|<a href="" class="editLink">Edit</a> -->
