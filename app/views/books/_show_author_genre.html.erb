@@ -1,16 +1,1 @@
- <div class="book-info">
-  <% if book.authors.nil? || book.authors == [] %>
-    <strong>Author(s): </strong>N/A</br>
-  <% else %>
-    <strong>Author(s): </strong><% book.authors.order(:name).all.each do |author| %>
-      <ul><%= link_to author.name, author_path(author) %></ul>
-    <% end %>
-  <% end %>
-  <% if book.genres.nil? || book.genres == [] %>
-    <strong>Genres(s): </strong>N/A  </br>
-  <% else %>
-    <strong>Genre(s): </strong><% book.genres.order(:name).all.each do |genre| %>
-       <ul><%= link_to genre.name, genre_path(genre) %></ul>
-    <% end %>
-  <% end %>
-</div> 
+<!-- REMOVE THIS IF NOT BEING USED? -->
