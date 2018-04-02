@@ -9,6 +9,10 @@ class Book < ActiveRecord::Base
   has_many :genres, through: :book_genres
   has_many :comments
 
+  def self.search(search, current_user)
+    where("user_id = ? AND title LIKE ?", current_user.id, "%#{search}%").order(:title)
+  end
+
   def self.borrowable(current_user)
     where("user_id != ? AND status = ?", current_user.id, "available").order(:title)
   end
