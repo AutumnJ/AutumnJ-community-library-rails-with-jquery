@@ -118,7 +118,8 @@ allComment.prototype.formatListOfAll = function() {
   let commentHtml = `
   <i>Book Title: </i><a href='/books/${this.book_id}/comments/${this.id}'>${this.title}</a><br>
   <li><i>Comment: </i>${this.content}<br>
-  <i>Comment submitted: </i>${this.date}</li><br>`
+  <i>Comment submitted: </i>${this.date}<br>
+  <a href='/books/${this.book_id}/comments/${this.id}/edit'>Edit</a></li><br>`
   return commentHtml;
 }
 
@@ -198,6 +199,7 @@ Genre.prototype.formatGenre = function() {
 }
 
 function loadNextComment(element) {
+  console.log(element.href)
     $.ajax({
     method: "GET",
     dataType: "json",
@@ -205,32 +207,17 @@ function loadNextComment(element) {
   })
     .success(function( data ) {
       let currentId = parseInt($(".js-next").attr("data-id"));
-      // if (data.length === 1) {
-      //   $("div.book-info-links").append(`<a href='/books/${data[0].book_id}/comments/${data[0].id}/edit'>Edit</a><br>`);
-      //   $(".js-next").hide();
-      //   return
       if (currentId === (data.length-1)) {
         var id = 0;
       } else {
         var id = parseInt($(".js-next").attr("data-id")) + 1;
       }
-      var nextBook = data[id].book_id
-      var nextComment = data[id].id
-
-      $.ajax ({
-        method: "GET",
-        dataType: "json",
-        url: "/books/" + nextBook + "/comments/" + nextComment
-      })
-        .success(function (data){
-        //this seems repetitive
-        let comment = data[id]
-        console.log(comment)
-        let newComment = new allComment(comment)
-        let commentHtml = newComment.formatListOfAllComments()
-        $(".js-next").attr("data-id", id)
-        $("div.book-info-links").replaceWith(commentHtml)
-      });
+      let comment = data[id]
+      let newComment = new allComment(comment)
+      let commentHtml = newComment.formatListOfAllComments()
+      $(".js-next").attr("data-id", id)
+      $("div.book-info-links").replaceWith(commentHtml)
+      $("div.count").html(`<i>Showing comment ${id+1} of ${data.length}</i>`)
     });
 }
 
@@ -238,11 +225,9 @@ allComment.prototype.formatListOfAllComments = function() {
   $(".bookTitle").html(`<i>Book Title: </i>${this.title}`)
   $(".bookComment").html(`<i>Comment: </i>${this.content}`)
   $(".commentDate").html(`<i>Comment submitted: </i>${this.date}`)
-  $(".deleteLink").attr('href', )
-  // $(".editLink").attr("href", `'/books/${this.book_id}/comments/${this.id}/edit'`)
 
   commentHtml = `
-  <a href='/books/${this.book_id}/comments/${this.id}/edit'>Edit</a><br>
+  | <a href='/books/${this.book_id}/comments/${this.id}/edit'>Edit</a><br>
   `
   return commentHtml;
 }
