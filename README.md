@@ -14,7 +14,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/Autumn
 
 ## License
 
-The app is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The app is available as open source under the terms of the [MIT License](https://github.com/AutumnJ/AutumnJ-community-library-rails-with-jquery/blob/master/LICENSE.md).
 
 ## Code of Conduct
 
