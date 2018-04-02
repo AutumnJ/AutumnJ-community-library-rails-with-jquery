@@ -44,6 +44,7 @@ class BooksController < ApplicationController
     if @book = Book.find_by(id: params[:id], borrower: current_user.id)
       book_id = @book.id
       @comments = Comment.user_comments_by_book(book_id, current_user)
+      @comment = Comment.new
 
       #power JSON view of other comments:
       @other_comments = Comment.other_users_comments((book_id), current_user)
