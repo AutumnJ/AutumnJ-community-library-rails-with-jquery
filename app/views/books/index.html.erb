@@ -1,28 +1,6 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet">
 <h1>Community Library</h1>
 
-<%= form_tag(books_path, :method => "get", id: "search-form") do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Search Books by Title" %>
-    <%= submit_tag "Search", :name => nil %>
-<% end %>
-
-<% if params[:search] %>
-  <% if !@books.present? %>
-    <h4>There are no books in your collection with the title <%= params[:search] %>.</h4>
-  <% else %>
-  <div class="book-list">
-    <% @books.each do |book| %>
-      <ul>
-        <%= link_to book.title, book_path(book) %>
-      </ul>
-    <% end %>
-    <div class="paginate">
-      <%= paginate @user_books, outer_window: 1 %>
-    </div>
-  <% end %>
-  </div>
-<% end %> 
-
 <h2>These are your books:</h2>
 <div class="book-list">
   <% if !@user_books.present? %>
