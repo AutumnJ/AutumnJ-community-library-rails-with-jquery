@@ -1,12 +1,12 @@
 <div class="book-info">
-<div class="count"><i>Showing comment 1 of <%= @comments.length %></i></div><br>
+<div class="count"></div><br>
 <div class="bookTitle"><i>Book Title: </i><%= @comment.book.title %></div>
 <div class="bookComment"><i>Comment: </i><%= @comment.content %></div>
 <div class="commentDate"></i><i> Comment submitted: </i><%= @comment.updated_at.strftime("%A, %b %e, %Y") %></div>
 
 <div class="book-info">
   <% if @comments.length > 1 %>
-      <a href="#" class="js-next" data-id="0">Next...</a>
+      <a href="#" class="js-next" data-id="a">Next...</a>
       <div class="book-info-links">| <%= link_to "Edit", edit_book_comment_path(@book, @comment) %></div>
   <% else %>
     <%= link_to "Edit", edit_book_comment_path(@book, @comment) %>
