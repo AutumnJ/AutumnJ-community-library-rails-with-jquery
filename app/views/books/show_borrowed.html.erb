@@ -5,17 +5,7 @@
 </div>
 <%= render partial:'show_basic_info', locals: {book: @book} %>
 
-<div class="book-authors">
-  <%= link_to "Authors", borrowed_book_path(@book), :class => "load-authors" %><br>
-  <strong></strong>
-  <ul></ul>
-</div>
-
-<div class="book-genres">
-  <%= link_to "Genres", borrowed_book_path(@book), :class => "load-genres" %><br>
-  <strong></strong>
-  <ul></ul>
-</div>
+<%= render partial:'show_author_genre', locals: {path: borrowed_book_path(@book)} %>
 
 <div class="book-info">
   <% if @comments.present? %>
