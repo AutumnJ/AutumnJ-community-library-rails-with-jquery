@@ -65,7 +65,6 @@ a.load-authors, .book-authors strong {
   float: left;
   font-size: 15pt;
   list-style-type: none;
-  list-style-position: outside;
   padding: 0;
 }
 
@@ -99,4 +98,8 @@ a.load-authors, .book-authors strong {
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 13pt;
   list-style-type: none;
+}
+
+.book-search {
+  padding-left: 1cm;
 }
