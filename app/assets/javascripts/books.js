@@ -8,6 +8,11 @@ function attachListeners() {
     e.preventDefault();
     loadOtherUsersComments(this);
   });
+  $('div.new-comment form').submit(function(e){
+    e.preventDefault();
+    alert("we r hack3rz"); 
+    addNewComment(this);
+  });
   $('a.load-authors').on('click', function(e){
     $(this).hide();
     e.preventDefault();
@@ -87,7 +92,6 @@ function loadAllComments(element) {
     url: element.href
   })
     .success(function( data ) {
-      console.log(data)
       if (!data[0]) {
         let $header = $("div.all-user-comments h2");
         $header.html("No comments yet!")
@@ -199,36 +203,92 @@ Genre.prototype.formatGenre = function() {
 }
 
 function loadNextComment(element) {
-  console.log(element.href)
+    console.log(element.href)
     $.ajax({
     method: "GET",
     dataType: "json",
     url: element.href
   })
     .success(function( data ) {
-      let currentId = parseInt($(".js-next").attr("data-id"));
+      //where are we at in collection?
+      let currentId = findCommentKey(data, element);
+      //how should we set our counter and id?
       if (currentId === (data.length-1)) {
         var id = 0;
       } else {
-        var id = parseInt($(".js-next").attr("data-id")) + 1;
+        var id = currentId += 1;
       }
+      //let's get those comment details
       let comment = data[id]
       let newComment = new allComment(comment)
-      let commentHtml = newComment.formatListOfAllComments()
+      //let's tell users where they're at, and update our attr
       $(".js-next").attr("data-id", id)
-      $("div.book-info-links").replaceWith(commentHtml)
       $("div.count").html(`<i>Showing comment ${id+1} of ${data.length}</i>`)
+
+      //append formatted object info to DOM
+      $("div.book-info-links").replaceWith(newComment.formatEditLink());
+      $(".bookTitle").html(newComment.formatTitle());
+      $(".bookComment").html(newComment.formatComment());
+      $(".commentDate").html(newComment.formatCommentDate());
     });
 }
 
-allComment.prototype.formatListOfAllComments = function() {
-  $(".bookTitle").html(`<i>Book Title: </i>${this.title}`)
-  $(".bookComment").html(`<i>Comment: </i>${this.content}`)
-  $(".commentDate").html(`<i>Comment submitted: </i>${this.date}`)
+function findCommentKey(data, element) {
+  if ($(".js-next").attr("data-id") === "a") {
+    let url = element.href.split("/")
+    let commentId = parseInt(url[url.length-1].replace('#',''))
+    foundBook = bookFinder(data, commentId)
+    let key = foundBook;
+    return parseInt(key);
+  } else {
+    return parseInt($(".js-next").attr("data-id"));
+  }
+}
 
-  commentHtml = `
+function bookFinder(data, commentId) {
+  for (var key in data) {
+    if (data[key].id === parseInt(commentId)) {
+      return key
+    }
+  }
+}
+
+allComment.prototype.formatTitle = function() {
+  return `<i>Book Title: </i>${this.title}`
+}
+
+allComment.prototype.formatComment = function() {
+  return `<i>Comment: </i>${this.content}`
+}
+
+allComment.prototype.formatCommentDate = function() {
+  return `<i>Comment submitted: </i>${this.date}`
+}
+
+allComment.prototype.formatEditLink = function() {
+  return `
   | <a href='/books/${this.book_id}/comments/${this.id}/edit'>Edit</a><br>
   `
+}
+
+function addNewComment(element) {
+  let values = $(element).serialize();
+  let comment = $.post(`${element.action}`, values);
+
+  comment.done(function(data) {
+    let newComment = new allComment(data)
+    let commentHtml = newComment.formatNewComment();
+
+    $("#comment_content").val("");
+    $("div.new-comment ul").append(commentHtml)   
+  });
+}
+
+allComment.prototype.formatNewComment = function() {
+  let commentHtml = `
+  <li><i>Comment: </i>${this.content}<br>
+  <i>Comment submitted: </i>${this.date}<br>
+  <a href='/books/${this.book_id}/comments/${this.id}/edit'>Edit</a></li><br>`
   return commentHtml;
 }
 
