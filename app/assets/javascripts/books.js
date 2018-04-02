@@ -10,7 +10,6 @@ function attachListeners() {
   });
   $('div.new-comment form').submit(function(e){
     e.preventDefault();
-    alert("we r hack3rz"); 
     addNewComment(this);
   });
   $('a.load-authors').on('click', function(e){
@@ -70,9 +69,13 @@ function Comment(comment) {
 function dateConversion(time) {
   let splitDate = time.split("T")
   let parseDate = splitDate[0].split("-")
+  let month = parseInt(parseDate[1]) - 1;
+  let day = parseInt(parseDate[2]) + 1
+  console.log(parseDate)
 
-  let date = new Date(Date.UTC(parseDate[0], parseDate[1], parseDate[2])); 
-  var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  let date = new Date(Date.UTC(parseDate[0], month, day)); 
+  console.log(date)
+  var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 
   return date.toLocaleDateString("en-US", options);
 }

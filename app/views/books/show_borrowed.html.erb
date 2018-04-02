@@ -35,7 +35,7 @@
     <%= f.hidden_field :book_id, value: @book.id %>
 
       <%= render partial: 'layouts/error_messages', locals: {obj: @comment, back: borrowed_book_path(@book)} %>
-      <strong>Enter a comment below!</strong>
+      <strong>Enter a new comment below!</strong>
       <%= render 'comments/form', f: f %>
       
     <% end %>
