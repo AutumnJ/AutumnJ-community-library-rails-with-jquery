@@ -113,7 +113,8 @@ class BooksController < ApplicationController
 
   def upload
     CSV.foreach(params[:book_list].path, headers: true) do |book|
-      Book.create(title: book[0], year_published: book[1], language: book[2], description: book[3], user_id: current_user.id, status: "private")
+      new_book = Book.new(title: book[0], year_published: book[1], language: book[2], description: book[3], user_id: current_user.id, status: "private")
+      new_book.save
     end
     redirect_to books_path
   end
