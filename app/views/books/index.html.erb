@@ -1,6 +1,14 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet">
 <h1>Community Library</h1>
 
+<h2>Import a list of books:</h2>
+<div class="upload">
+  <%= form_tag(books_upload_path, multipart: true) do  %>
+    <%= file_field_tag :book_list %><br>
+    <div class="upload-submit"><%= submit_tag "Import Books" %></div>
+  <% end %>
+</div>
+
 <h2>These are your books:</h2>
 <div class="book-list">
   <% if !@user_books.present? %>

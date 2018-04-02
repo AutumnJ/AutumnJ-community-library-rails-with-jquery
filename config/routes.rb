@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   #search
   get '/books/search', to: 'books#search', as: 'search'
 
+  #upload book csv
+  post '/books/upload', to: 'books#upload'
+
   #nested this way for clarity, as new comments are instantiated from borrowed books only
   #comment belongs_to book and borrowed is "nested" under books/:id
   #so comment CRUD routes live with books#show -- books/:book_id/comments/:id

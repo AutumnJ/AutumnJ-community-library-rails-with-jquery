@@ -1,7 +1,9 @@
 class BooksController < ApplicationController
 
+  require 'csv'
+
   before_action :find_book
-  skip_before_action :find_book, :only => [:index, :new, :create, :show_borrowed, :return_book, :show_available_to_borrow, :borrow_book, :search]
+  skip_before_action :find_book, :only => [:index, :new, :create, :show_borrowed, :return_book, :show_available_to_borrow, :borrow_book, :search, :upload]
 
   def index
     @user_books = current_user.all_books.page(params[:page])
@@ -107,6 +109,13 @@ class BooksController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def upload
+    CSV.foreach(params[:book_list].path, headers: true) do |book|
+      Book.create(title: book[0], year_published: book[1], language: book[2], description: book[3], user_id: current_user.id, status: "private")
+    end
+    redirect_to books_path
   end
 
   def borrow_book

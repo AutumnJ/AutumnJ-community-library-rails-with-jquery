@@ -100,6 +100,11 @@ a.load-authors, .book-authors strong {
   list-style-type: none;
 }
 
-.book-search {
+.book-search, .upload {
+  padding-left: 1cm;
+}
+
+.upload-submit {
+  padding-top: 0.5em;
   padding-left: 1cm;
 }
