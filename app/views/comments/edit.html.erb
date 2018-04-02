@@ -8,6 +8,7 @@
 
   <%= render 'form', f: f %>
 
+  <button class="delete-button"><%= link_to "Delete", book_comment_path(@book, @comment), method: "delete", data: {confirm: "Are you sure?"}%></button>
 
 <% end %>
 
