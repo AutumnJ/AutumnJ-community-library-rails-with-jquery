@@ -9,17 +9,7 @@
   <strong>Status:</strong> <%= @text %>
 </div>
 
-<div class="book-authors">
-  <%= link_to "Authors", book_path(@book), :class => "load-authors" %><br>
-  <strong></strong>
-  <ul></ul>
-</div>
-
-<div class="book-genres">
-  <%= link_to "Genres", book_path(@book), :class => "load-genres" %><br>
-  <strong></strong>
-  <ul></ul>
-</div>
+<%= render partial:'show_author_genre', locals: {path: book_path(@book)} %>
 
 <div class="book-info">
   <% if @book.comments.present? %>
