@@ -1,13 +1,10 @@
 class BooksController < ApplicationController
 
   before_action :find_book
-  skip_before_action :find_book, :only => [:index, :new, :create, :show_borrowed, :return_book, :show_available_to_borrow, :borrow_book]
+  skip_before_action :find_book, :only => [:index, :new, :create, :show_borrowed, :return_book, :show_available_to_borrow, :borrow_book, :search]
 
   def index
     @user_books = current_user.all_books.page(params[:page])
-    if params[:search]
-      @books = Book.search(params[:search], current_user).page(params[:page])
-    end
     @books_to_borrow = Book.borrowable(current_user)
     @books_to_return = Book.returnable(current_user)
   end
@@ -41,6 +38,12 @@ class BooksController < ApplicationController
       format.json { render json: @book }
     end
 
+  end
+
+  def search
+    if params[:search]
+      @books = Book.search(params[:search], current_user).page(params[:page])
+    end
   end
 
   def show_borrowed
