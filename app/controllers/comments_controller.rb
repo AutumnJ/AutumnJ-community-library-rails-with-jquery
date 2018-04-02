@@ -30,9 +30,10 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id 
     if @comment.save
-      redirect_to borrowed_book_path(@book) 
-    else
-      render :new
+      render json: @comment, status: 201
+    # else
+      # render redirect_to borrowed_book_path(@book) 
+      #How to render current page if validation fails?
     end
   end 
 
@@ -45,7 +46,7 @@ class CommentsController < ApplicationController
       if @book.borrower == current_user.id
         redirect_to borrowed_book_path(@book)
       else
-        redirect_to comments_path
+        redirect_to comments_path, {notice: 'Comment updated!'}
       end
     else
       render :edit
