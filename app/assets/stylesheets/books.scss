@@ -35,14 +35,42 @@
 }
 
 
-a.load-comments, a.load-authors, .all-comments p, .book-authors p, .all-comments strong, .book-authors strong, a.load-genres, .book-genres p, .book-genres strong {
+a.load-comments, .all-comments strong {
   font-family: 'Open Sans Condensed', sans-serif;
   padding-left: 2cm;
   font-size: 15pt;
   list-style-type: none;
 }
 
-.all-comments ul, .book-authors ul, .book-genres ul {
+a.load-authors, .book-authors strong {
+  font-family: 'Open Sans Condensed', sans-serif;
+  padding-left: 2cm;
+  font-size: 15pt;
+  float: left;
+  border:0;
+}
+
+.book-genres strong, a.load-genres {
+  font-family: 'Open Sans Condensed', sans-serif;
+  padding-left: 2cm;
+  font-size: 15pt;
+  list-style-type: none;
+  float:left;
+  border:1px;
+}
+
+
+.book-authors li, .book-genres li {
+  font-family: 'Open Sans Condensed', sans-serif;
+  float: left;
+  font-size: 15pt;
+  list-style-type: none;
+  list-style-position: outside;
+  padding: 0;
+}
+
+
+.all-comments ul {
   font-family: 'Open Sans Condensed', sans-serif;
   padding-left: 3cm;
   font-size: 15pt;
