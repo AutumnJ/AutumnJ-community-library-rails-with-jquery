@@ -6,17 +6,7 @@
 
 <%= render partial:'show_basic_info', locals: {book: @book} %>
 
-<div class="book-authors">
-  <%= link_to "Authors", view_borrowable_book_path(@book), :class => "load-authors" %><br>
-  <strong></strong>
-  <ul></ul>
-</div>
-
-<div class="book-genres">
-  <%= link_to "Genres", view_borrowable_book_path(@book), :class => "load-genres" %><br>
-  <strong></strong>
-  <ul></ul>
-</div>
+<%= render partial:'show_author_genre', locals: {path: view_borrowable_book_path(@book)} %>
 
 <div class="all-comments">
   <%= link_to "See Comments", view_borrowable_book_path(@book), :class => "load-comments" %><br>
