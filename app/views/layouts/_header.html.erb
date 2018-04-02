@@ -3,6 +3,7 @@
     <% if user_signed_in? %>
       <%= link_to "Home", authenticated_root_path %> |
       <%= link_to "Add Book", new_book_path %> |
+      <%= link_to "Search", search_path %> |
       <%= link_to "Logout", destroy_user_session_path, :method => :delete  %> 
     <% else %>
       <%= link_to "Sign up", new_user_registration_path  %> |
