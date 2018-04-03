@@ -14,8 +14,15 @@ h1 {
   font-size: 13pt;
 }
 
-.book-list p, .paginate {
+.book-list p {
   font-family: 'Open Sans Condensed', sans-serif;
   color: #ff0000;
   padding-left: 1cm;
+}
+
+.paginate {
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: #ff0000;
+  padding-left: 1cm;
+  font-size: 15pt;
 }

@@ -22,7 +22,14 @@
         <i> Comment submitted: </i><%= comment.updated_at.strftime("%A, %b %e,  %Y") %><br>
         <%= link_to "Edit", edit_book_comment_path(@book, comment) %></ul>
       <% end %>
-
+    <% else %>
+      <div class="no-comments">
+        <strong>Your comments about this book: </strong><i>No comments yet.</i>
+      </div>
+      <div class="note">
+        <i>Comments are visible to book's owner, and other users when book is available for borrowing. 
+        You can view all your comments from the comments section of the homepage.</i>
+      </div>
   <% end%>
   <div class="new-comment">
     <ul></ul>

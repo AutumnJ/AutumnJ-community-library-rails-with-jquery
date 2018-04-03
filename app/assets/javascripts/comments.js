@@ -10,6 +10,7 @@ function attachCommentListeners() {
   });
   $('div.new-comment form').submit(function(e){
     e.preventDefault();
+    $("div.no-comments i").hide();
     addNewComment(this);
   });
   $('a.load-all-comments').on('click', function(e){
@@ -62,7 +63,6 @@ function dateConversion(time) {
   let parseDate = splitDate[0].split("-")
   let month = parseInt(parseDate[1]) - 1;
   let day = parseInt(parseDate[2]) + 1
-  console.log(parseDate)
 
   let date = new Date(Date.UTC(parseDate[0], month, day)); 
   console.log(date)
@@ -140,7 +140,7 @@ function loadNextComment(element) {
       //let's get those comment details
       let comment = data[id]
       let newComment = new allComment(comment)
-      //let's tell users where they're at, and update our attr
+      //let's tell users where they're at, and update our hidden counter 
       $(".js-next").attr("data-id", id)
       $("div.count").html(`<i>Showing comment ${id+1} of ${data.length}</i>`)
 
