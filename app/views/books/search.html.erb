@@ -17,9 +17,6 @@
         <%= link_to book.title, book_path(book) %>
       </ul>
     <% end %>
-    <div class="paginate">
-      <%= paginate @books, outer_window: 1 %>
-    </div>
   <% end %>
   </div>
 <% end %> 
