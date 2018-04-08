@@ -44,7 +44,7 @@ class BooksController < ApplicationController
 
   def search
     if params[:search]
-      @books = Book.search(params[:search], current_user).page(params[:page])
+      @books = Book.search(params[:search], current_user)
     end
   end
 
@@ -65,7 +65,8 @@ class BooksController < ApplicationController
           msg_no_comments: "No comments from other users",
           msg: "Other User's Comments:",
           authors: @book.authors,
-          genres: @book.genres }
+          genres: @book.genres 
+          }
         }
       end
     else
