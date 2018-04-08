@@ -24,7 +24,6 @@ function attachCommentListeners() {
   });
 }
 
-
 function loadOtherUsersComments(element) {
   $.ajax({
     method: "GET",
@@ -32,7 +31,6 @@ function loadOtherUsersComments(element) {
     url: element.href
   })
     .success(function( data ) {
-      let comments = data.comments
       if (comments.length === 0) {
         let $header = $("div.all-comments strong");
         $header.html(data.msg_no_comments)
@@ -51,7 +49,6 @@ function loadOtherUsersComments(element) {
     });
 }
 
-
 function Comment(comment) {
   this.content = comment.content
   this.user = comment.user.name
@@ -65,7 +62,6 @@ function dateConversion(time) {
   let day = parseInt(parseDate[2]) + 1
 
   let date = new Date(Date.UTC(parseDate[0], month, day)); 
-  console.log(date)
   var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 
   return date.toLocaleDateString("en-US", options);
@@ -122,7 +118,6 @@ allComment.prototype.formatListOfAll = function() {
 }
 
 function loadNextComment(element) {
-    console.log(element.href)
     $.ajax({
     method: "GET",
     dataType: "json",
