@@ -48,7 +48,7 @@ function Author(author) {
 
 Author.prototype.formatAuthor = function() {
   let authorHtml = `
-  <li><a href='/authors/${this.id}'>${this.name}</a></li><br>`
+  <li><a href='/authors/${this.id}'>${this.name}</a></li>`
   return authorHtml;
 }
 
@@ -85,7 +85,7 @@ function Genre(genre) {
 
 Genre.prototype.formatGenre = function() {
   let genreHtml = `
-  <li><a href='/genres/${this.id}'>${this.name}</a></li><br>`
+  <li><a href='/genres/${this.id}'>${this.name}</a></li>`
   return genreHtml;
 }
 
