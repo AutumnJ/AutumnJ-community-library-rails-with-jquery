@@ -46,8 +46,7 @@ a.load-authors, .book-authors strong {
   font-family: 'Open Sans Condensed', sans-serif;
   padding-left: 2cm;
   font-size: 15pt;
-  float: left;
-  border:0;
+  border:0px;
 }
 
 .book-genres strong, a.load-genres {
@@ -55,17 +54,21 @@ a.load-authors, .book-authors strong {
   padding-left: 2cm;
   font-size: 15pt;
   list-style-type: none;
-  float:left;
   border:1px;
+}
+
+.book-authors ul, .book-genres ul {
+  -webkit-margin-before: 0px;
+  -webkit-margin-after: 0px;
+  -webkit-padding-start: 0px;
 }
 
 
 .book-authors li, .book-genres li {
   font-family: 'Open Sans Condensed', sans-serif;
-  float: left;
+  padding-left: 3cm;
   font-size: 15pt;
   list-style-type: none;
-  padding: 0;
 }
 
 
