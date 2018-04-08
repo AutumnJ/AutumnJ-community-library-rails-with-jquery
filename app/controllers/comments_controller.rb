@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
 
   def show
     @comments = Comment.user_comments(current_user)
+    
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @comments }
@@ -31,9 +32,6 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id 
     if @comment.save
       render json: @comment, status: 201
-    # else
-      # render redirect_to borrowed_book_path(@book) 
-      #How to render current page if validation fails?
     end
   end 
 
