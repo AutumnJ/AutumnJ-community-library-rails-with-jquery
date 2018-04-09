@@ -68,6 +68,15 @@ h2, h2 a, h2 a:visited, h2 a:active {
     font-weight: 500;
 }
 
+h4, h4 a, h4 a:visited, h4 a:active {
+    font-size: 10pt;
+    text-decoration: none;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #000000;
+    padding-left: 3mm;
+    font-weight: 500;
+}
+
 .login {
     padding-left: 20mm;
 }
