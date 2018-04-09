@@ -13,7 +13,7 @@ function attachCommentListeners() {
     $("div.no-comments i").hide();
     addNewComment(this);
   });
-  $('a.load-all-comments').on('click', function(e){
+  $('a.load-all-comments').on('click', function(e){ 
     e.preventDefault();
     $(this).hide();
     loadAllComments(this);
@@ -21,6 +21,11 @@ function attachCommentListeners() {
   $(".js-next").on("click", function(e){
     e.preventDefault();
     loadNextComment(this);
+  });
+  $("h4 .alphabetize").on('click', function(e){
+    e.preventDefault();
+    $(this).hide();
+    alphabetizeComments(this);
   });
 }
 
@@ -89,6 +94,11 @@ function loadAllComments(element) {
       } else {
         $("div.all-user-comments h2").html("Your comments:");
 
+        let $alphaButton = $(".alphabetize")
+
+        $alphaButton.attr('href', element.href)
+        $alphaButton.text("[View Comments Alphabetically]")
+
         let $ul = $("div.all-user-comments ul")
         data.forEach(comment => {
           let newComment = new allComment(comment)
@@ -105,17 +115,42 @@ function allComment(comment) {
   this.title = comment.book.title
   this.date = dateConversion(comment.updated_at)
   this.id = comment.id
-  this.book_id = comment.book_id
+  this.bookID = comment.book_id
   this.book = comment.book
 }
 
 allComment.prototype.formatListOfAll = function() {
   let commentHtml = `
-  <i>Book Title: </i><a href='/books/${this.book_id}/comments/${this.id}'>${this.title}</a><br>
-  <li><i>Comment: </i>${this.content}<br>
+  <li><i>Book Title: </i><a href='/books/${this.bookID}/comments/${this.id}'>${this.title}</a><br>
+  <i>Comment: </i>${this.content}<br>
   <i>Comment submitted: </i>${this.date}<br>
-  <a href='/books/${this.book_id}/comments/${this.id}/edit'>Edit</a></li><br>`
+  <a href='/books/${this.bookID}/comments/${this.id}/edit'>Edit</a></li><br>`
   return commentHtml;
+}
+
+function alphabetizeComments(element) {
+    $.ajax({
+    method: "GET",
+    dataType: "json",
+    url: element.href
+  })
+   .success(function( data ) {
+      $("div.all-user-comments h2").html("Your comments:");
+      $(".all-user-comments ul").html('');
+      let $ul = $("div.all-user-comments ul")
+
+      sortedData = data.sort(function(a, b) {
+        const CONTENTA = a.content.toLowerCase();
+        const CONTENTB = b.content.toLowerCase();
+        return (CONTENTA < CONTENTB ? -1 : 1)
+      });
+      sortedData.forEach(comment => {
+        let newComment = new allComment(comment)
+        let commentHtml = newComment.formatListOfAll()
+
+        $ul.append(commentHtml)
+      });
+  });
 }
 
 function loadNextComment(element) {
@@ -182,7 +217,7 @@ allComment.prototype.formatCommentDate = function() {
 
 allComment.prototype.formatEditLink = function() {
   return `
-  | <a href='/books/${this.book_id}/comments/${this.id}/edit'>Edit</a><br>
+  | <a href='/books/${this.bookID}/comments/${this.id}/edit'>Edit</a><br>
   `
 }
 
@@ -207,6 +242,6 @@ allComment.prototype.formatNewComment = function() {
   let commentHtml = `
   <li><i>Comment: </i>${this.content}<br>
   <i>Comment submitted: </i>${this.date}<br>
-  <a href='/books/${this.book_id}/comments/${this.id}/edit'>Edit</a></li><br>`
+  <a href='/books/${this.bookID}/comments/${this.id}/edit'>Edit</a></li><br>`
   return commentHtml;
 }
