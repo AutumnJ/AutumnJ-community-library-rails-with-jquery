@@ -6,7 +6,7 @@ function attachCommentListeners() {
   $('a.load-comments').on('click', function(e){
     $(this).hide();
     e.preventDefault();
-    loadOtherUsersComments(this);
+    loadCertainUsersComments(this);
   });
   $('div.new-comment form').submit(function(e){
     e.preventDefault();
@@ -24,13 +24,14 @@ function attachCommentListeners() {
   });
 }
 
-function loadOtherUsersComments(element) {
+function loadCertainUsersComments(element) {
   $.ajax({
     method: "GET",
     dataType: "json",
     url: element.href
   })
     .success(function( data ) {
+      let comments = data.comments;
       if (comments.length === 0) {
         let $header = $("div.all-comments strong");
         $header.html(data.msg_no_comments)
@@ -62,7 +63,7 @@ function dateConversion(time) {
   let day = parseInt(parseDate[2]) + 1
 
   let date = new Date(Date.UTC(parseDate[0], month, day)); 
-  var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+  let options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 
   return date.toLocaleDateString("en-US", options);
 }
@@ -160,7 +161,7 @@ function findCommentKey(data, element) {
 }
 
 function bookFinder(data, commentId) {
-  for (var key in data) {
+  for (let key in data) {
     if (data[key].id === parseInt(commentId)) {
       return key
     }
@@ -189,12 +190,16 @@ function addNewComment(element) {
   let values = $(element).serialize();
   let comment = $.post(`${element.action}`, values);
 
-  comment.done(function(data) {
+  comment.success(function(data) {
     let newComment = new allComment(data)
     let commentHtml = newComment.formatNewComment();
 
     $("#comment_content").val("");
     $("div.new-comment ul").append(commentHtml)   
+  });
+
+  comment.error(function(){
+    $("#comment_content").attr("placeholder", "Input cannot be empty...");
   });
 }
 
