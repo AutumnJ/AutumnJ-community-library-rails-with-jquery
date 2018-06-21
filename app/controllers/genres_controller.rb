@@ -3,7 +3,6 @@ class GenresController < ApplicationController
   before_action :find_genres_books, :find_genres_borrowable_books
 
   def show
-
   end
 
   private
