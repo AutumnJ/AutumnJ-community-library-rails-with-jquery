@@ -84,8 +84,7 @@ function Genre(genre) {
 }
 
 Genre.prototype.formatGenre = function() {
-  let genreHtml = `
-  <li><a href='/genres/${this.id}'>${this.name}</a></li>`
+  let genreHtml = `<li><a href='/genres/${this.id}'>${this.name}</a></li>`
   return genreHtml;
 }
 
