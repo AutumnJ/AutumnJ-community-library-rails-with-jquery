@@ -3,7 +3,6 @@ class AuthorsController < ApplicationController
   before_action :find_authors_books, :find_authors_borrowable_books
 
   def show    
-
   end
 
   private
